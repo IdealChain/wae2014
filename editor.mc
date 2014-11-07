@@ -97,10 +97,10 @@ if ($.Save) {
 # Speichern wurde gedrückt...
   if ($.insert == 1) {
   # Datensatz aus Formularfeldern in Datenbank einfügen
-    my $sth = $dbh->prepare("INSERT INTO schranz_cms (docid,content,metatext,title,parent,created) values (?,?,?,?,?,NOW())");
-    $sth->execute($.docid,$.content,$.metatext,$.title,$.parentid);
+    my $sth = $dbh->prepare("INSERT INTO schranz_cms (docid,content,title,parent,created) values (?,?,?,?,NOW())");
+    $sth->execute($.docid,$.content,$.title,$.parentid);
     $msg = "Datensatz ". $.docid ." neu in DB aufgenommen.".$sth->rows();
-    $.insert = 0;
+    $.insert(0);
   } else {
   # Datensatz in Datenbank ändern
     my $sth = $dbh->prepare("UPDATE schranz_cms SET content = ?, title = ?, parent = ? WHERE docid = ?");
