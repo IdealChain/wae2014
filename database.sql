@@ -1,0 +1,2 @@
+-- Setup group7_* tables
+-- (don't drop any tables from other groups)
