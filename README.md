@@ -28,17 +28,17 @@ Local development environment
 
 * Clone/symlink this repository into **ws14/comps**
 
-* Copy following Module/Config files from weng ** /usr/local/htdocs/ws14 ** into your **ws14**:
+* Copy following Module/Config files from weng **/usr/local/htdocs/ws14** into your **ws14**:
 	* lib/Ws14/DBI.pm
 	* conf/global.cfg
 	* conf/local.cfg
 
-* For now: (keep session in filesystem instead of database)
+* For now: (keep session in filesystem instead of database)  
   Comment out $SESSION\_CONF stuff (lines 21-32) in **lib/Ws14/DBI.pm**
 
-* Setup local MySQL/MariaDB server
-  Create database/user **tuv** and grant all privileges
-  Copy weng: **.my.cnf** to your homedir
+* Setup local MySQL/MariaDB server  
+  Create database/user **tuv** and grant all privileges  
+  Copy weng: **.my.cnf** to your homedir  
   Test access: execute **mysql**
 
 * Setup DB schema and test data
