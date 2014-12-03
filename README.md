@@ -11,7 +11,7 @@ Links
 * Assignment: http://weng.culturall.com:8020/AngabeWAE
 * Deployed application: http://weng.culturall.com:8020/wae07
 * Mason Tipps: http://weng.culturall.com:8020/MasonCodeTipps
-* phpMyAdmin: http://weng.culturall.com:8020/phpMyAdmin
+* phpMyAdmin: http://weng.culturall.com:8020/phpMyAdmin/
 * Mason/Poet: http://www.masonhq.com
 
 Local development environment
