@@ -1,2 +1,2 @@
--- Setup group7_* tables
+-- Setup wae07_* tables
 -- (don't drop any tables from other groups)
