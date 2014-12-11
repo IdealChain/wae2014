@@ -1,10 +1,10 @@
 <div class="menu">
 <h1>Menu</h1>
 <ul>
-% foreach my $page (values $pages) {
+% foreach my $id (sort keys $pages) {
   <li>
-    <a href="index?page_id=<% $page->{'id'} %>">
-      <% $page->{'title'} %>
+    <a href="index?page_id=<% $id %>">
+      <% $pages->{$id}->{'title'} %>
     </a>
   </li>
 % }
@@ -15,7 +15,7 @@
 
 <%init>
   my $dbh = Ws14::DBI->dbh();
-  my $sth = $dbh->prepare("select id, title from wae07_pages");
+  my $sth = $dbh->prepare("select id, parent_id, title from wae07_pages");
   $sth->execute();
   my $pages = $sth->fetchall_hashref("id");
 </%init>

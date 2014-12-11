@@ -9,7 +9,8 @@ DROP TABLE IF EXISTS `wae07_pages`;
 CREATE TABLE `wae07_users` (
   `id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
   `username` varchar(32) NOT NULL UNIQUE KEY,
-  `password` varchar(255) NOT NULL,
+  `password_hash` varchar(255) NOT NULL,
+  `password_salt` varchar(255) NOT NULL,
   `email` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

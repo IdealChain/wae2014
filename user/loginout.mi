@@ -1,0 +1,24 @@
+<div class="login">
+% if ($loggedin) {
+  User: <% $m->session->{'username'} %>
+  <a href="user/logout">Logout</a>
+% } else {
+  <form action="user/login" method="post">
+    <label for="username">Username:</label>
+    <input name="username" type="text" value="<% $.username %>"/>
+    <label for="password">Password:</label>
+    <input name="password" type="password" value="<% $.password %>"/>
+    <input name="login" type="submit" value="Login"/>
+    <a href="register">Register</a>
+  </form>
+% }
+</div>
+
+<%class>
+  has 'username';
+  has 'password';
+</%class>
+
+<%init>  
+  my $loggedin = defined($m->session->{user_id}) and defined($m->session->{username});
+</%init>
