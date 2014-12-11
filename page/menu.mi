@@ -1,14 +1,15 @@
-<h1>All pages</h1>
-
+<div class="menu">
+<h1>Menu</h1>
 <ul>
 % foreach my $page (values $pages) {
   <li>
-    <a href="page?id=<% $page->{'id'} %>">
+    <a href="index?page_id=<% $page->{'id'} %>">
       <% $page->{'title'} %>
     </a>
   </li>
 % }
 </ul>
+</div>
 
 <% scalar(keys $pages) %> pages are here.
 

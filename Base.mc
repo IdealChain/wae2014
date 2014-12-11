@@ -12,6 +12,9 @@ has 'maintitle' => (default => 'WAE Group 7');
 % }}
     </head>
     <body>
+% if (my $message = delete($m->session->{message})) {
+      <div class="message" style="color:red"><% $message %></div>
+% }
       <% inner() %>
       <& footer.mi, grp => '7' &>
     </body>
