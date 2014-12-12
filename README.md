@@ -43,8 +43,8 @@ Local development environment
 
 * Setup DB schema and test data
 
-		mysql < db_schema.sql
-		mysql < db_dataseeder.sql
+		mysql < db-schema.sql
+		mysql < db-dataseeder.sql
 
 * Start local server, and open your browser
 

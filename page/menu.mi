@@ -1,21 +1,57 @@
-<div class="menu">
-<h1>Menu</h1>
-<ul>
-% foreach my $id (sort keys $pages) {
-  <li>
-    <a href="index?page_id=<% $id %>">
-      <% $pages->{$id}->{'title'} %>
-    </a>
-  </li>
+<%class>
+	my $dbh = Ws14::DBI->dbh();
+	my $sth = $dbh->prepare("select id, parent_id, title from wae07_pages");
+	$sth->execute();
+	my $pages = $sth->fetchall_hashref("id");
+
+	# build an actual hierarchical tree from the db data that only has
+	# a parent reference
+	my %pageTree = ();
+	
+	# level 1
+	my %pagesWithParent;
+	foreach my $id (keys $pages) {
+		if (not defined $pages->{$id}->{'parent_id'}) { 
+			$pageTree{$id} = {};
+		} else {
+			$pagesWithParent{$id} = $pages->{$id};
+		}
+	}
+	
+	# level 2
+	my %level2Pages = ();
+	foreach my $id (keys %pagesWithParent) {
+		my $parentId = $pagesWithParent{$id}->{'parent_id'};
+		if (exists $pageTree{$parentId}) {
+			$pageTree{$parentId}->{$id} = {};
+			$level2Pages{$id} = $pageTree{$parentId}->{$id};
+		}
+	}
+	
+	# level 3
+	foreach my $id (keys %pagesWithParent) {
+		my $parentId = $pagesWithParent{$id}->{'parent_id'};
+		if (exists $level2Pages{$parentId}) {
+			$level2Pages{$parentId}->{$id} = {};
+		}
+	}
+</%class>
+
+<%method printMenu (%tree)>
+	<ul>
+% foreach my $id (sort keys %tree) {
+		<li>
+		<a href="page?id=<% $id %>">
+			<% $pages->{$id}->{'title'} %>
+		</a>
+% if ($tree{$id}) {
+		<% $.printMenu(%{$tree{$id}}) %>
 % }
-</ul>
-</div>
+		</li>
+% }
+	</ul>
+</%method>
 
-<% scalar(keys $pages) %> pages are here.
-
-<%init>
-  my $dbh = Ws14::DBI->dbh();
-  my $sth = $dbh->prepare("select id, parent_id, title from wae07_pages");
-  $sth->execute();
-  my $pages = $sth->fetchall_hashref("id");
-</%init>
+<nav class="menu">
+	<% $.printMenu(%pageTree) %>
+</nav>
