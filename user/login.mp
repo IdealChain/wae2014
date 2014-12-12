@@ -11,7 +11,7 @@ method handle() {
     $m->session->{'user_id'} = $user->{'id'};
     $m->session->{'user_name'} = $user->{'username'};
     $m->session->{'user_email'} = $user->{'email'};
-    $m->session->{'message'} = sprintf("User %s logged in.", $user->{'username'});
+    $m->session->{'message'} = sprintf("User '%s' logged in.", $user->{'username'});
   } else {
     $m->session->{'message'} = "Username or password not valid! Please try again.";    
   }

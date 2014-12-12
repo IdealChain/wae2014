@@ -1,6 +1,6 @@
 <div class="login">
 % if ($loggedin) {
-  User: <% $m->session->{'username'} %>
+  User: <% $m->session->{'user_name'} %>
   <a href="user/logout">Logout</a>
 % } else {
   <form action="user/login" method="post">
@@ -20,5 +20,5 @@
 </%class>
 
 <%init>  
-  my $loggedin = defined($m->session->{user_id}) and defined($m->session->{username});
+  my $loggedin = defined($m->session->{'user_id'}) and defined($m->session->{'user_name'});
 </%init>
