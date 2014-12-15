@@ -1,4 +1,4 @@
-<%class>
+<%init>
 	my $dbh = Ws14::DBI->dbh();
 	my $sth = $dbh->prepare("select id, parent_id, title from wae07_pages");
 	$sth->execute();
@@ -35,17 +35,17 @@
 			$level2Pages{$parentId}->{$id} = {};
 		}
 	}
-</%class>
+</%init>
 
-<%method printMenu (%tree)>
+<%method printMenu ($pages, %tree)>
 	<ul>
 % foreach my $id (sort keys %tree) {
 		<li>
-		<a href="page?id=<% $id %>">
+		<a href="index?page_id=<% $id %>">
 			<% $pages->{$id}->{'title'} %>
 		</a>
 % if ($tree{$id}) {
-		<% $.printMenu(%{$tree{$id}}) %>
+		<% $.printMenu($pages, %{$tree{$id}}) %>
 % }
 		</li>
 % }
@@ -53,5 +53,5 @@
 </%method>
 
 <nav class="menu">
-	<% $.printMenu(%pageTree) %>
+	<% $.printMenu($pages, %pageTree) %>
 </nav>
