@@ -28,6 +28,11 @@ Local development environment
 
 * Clone/symlink this repository into **ws14/comps**
 
+* Symlink the **static** directory so it is used as **ws14/static**
+		cd ws14
+		rm -r static/
+		ln -s comps/static static
+
 * Copy following Module/Config files from weng **/usr/local/htdocs/ws14** into your **ws14**:
 	* lib/Ws14/DBI.pm
 	* conf/global.cfg

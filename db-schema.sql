@@ -20,6 +20,7 @@ CREATE TABLE `wae07_pages` (
   `title` TINYTEXT NOT NULL,
   `content` TEXT NOT NULL,
   `author_user_id` int NULL,
+  `created` DATETIME DEFAULT CURRENT_TIMESTAMP,
   CONSTRAINT FOREIGN KEY (`parent_id`)
     REFERENCES `wae07_pages` (`id`)
     ON DELETE SET NULL ON UPDATE CASCADE,

@@ -1,0 +1,8 @@
+.formField {
+  margin: 10px 0; }
+  .formField label {
+    display: inline-block;
+    width: 5em; }
+
+#formButtons {
+  margin-bottom: 10px; }

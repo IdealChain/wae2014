@@ -3,13 +3,14 @@ has 'maintitle' => (default => 'WAE Group 7');
 </%class>
 
 <%augment wrap>
+<!doctype html>
   <html>
     <head>
       <link rel="stylesheet" href="static/css/style.css">
-      <script src="/static/js/ckeditor/ckeditor.js"></script>
 % $.Defer {{
       <title><% $.maintitle %></title>
 % }}
+	<% $.head %>
     </head>
     <body>
 % if (my $message = delete($m->session->{message})) {
@@ -24,3 +25,7 @@ has 'maintitle' => (default => 'WAE Group 7');
 <%flags>
 extends => undef
 </%flags>
+
+<%method head>
+% #override in component do add more tags to head
+</%method>
