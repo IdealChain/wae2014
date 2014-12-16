@@ -1,4 +1,3 @@
-<& user/loginout.mi &>
 <& page/menu.mi &>
 
 <& page/view.mi, id => $.page_id &>

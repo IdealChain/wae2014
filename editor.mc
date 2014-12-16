@@ -2,9 +2,7 @@
   has 'id';
   has 'title';
   has 'content' => (default => "<font face=Verdana>bitte hier den Text eingeben.\n</font>\n");
-  has 'metatext';
   has 'save';
-  has 'insert' => (default => 0);
   has 'parent_id';
 </%class>
 
@@ -14,7 +12,7 @@
 </%method>
 
 <h2>
-% if (defined($.id) && ($.insert==0)) {
+% if (defined($.id)) {
 Dokument <% $.id %> editieren
 % } else {
 Neues Dokument anlegen
@@ -28,7 +26,6 @@ Neues Dokument anlegen
 method="post" enctype="application/x-www-form-urlencoded">
 
 <input type="hidden" name="id" value="<% $.id %>">
-<input type="hidden" name="insert" value="<% $.insert %>">
 
 <div class="formField">
 	<label for="titleInput">Titel:</label>
@@ -73,6 +70,11 @@ method="post" enctype="application/x-www-form-urlencoded">
 
 	my $msg = "Welcome to the WCM content editor.";
 	my %docTitleAndIds = ('0', 'top level document');
+  
+  if (not $m->session->{'user_id'}) {
+    $m->session->{'message'} = "Please log in for creating and editing pages!";
+    $m->redirect(".");
+  }
 
 	my $sth = $dbh->prepare("SELECT id, title from wae07_pages");
 	$sth->execute();
@@ -81,35 +83,27 @@ method="post" enctype="application/x-www-form-urlencoded">
 	}
 
 	# $m->print("Content:". $.content . ",<br/> args(content):" . $.args->{'content'} . "<br/>");
-	if ($.save) {
-	# Speichern wurde gedrückt...
-		if ($.insert == 1) {
-			# Datensatz aus Formularfeldern in Datenbank einfügen
-			my $sth = $dbh->prepare("INSERT INTO wae07_pages (id,content,title,parent_id,created) values (?,?,?,?,NOW())");
-			$sth->execute($.id,$.content,$.title,$.parentid);
-			$msg = "Datensatz ". $.id ." neu in DB aufgenommen.".$sth->rows();
-			$.insert(0);
-		} else {
+	if ($.save) { # Speichern wurde gedrückt...
+		if ($.id) {
 			# Datensatz in Datenbank ändern
-			my $sth = $dbh->prepare("UPDATE wae07_pages SET content = ?, title = ?, parent = ? WHERE id = ?");
-			$sth->execute($.content,$.title,$.parentid,$.id);
-			$msg = "Datensatz " . $.id ." in DB ver&auml;ndert.".$sth->rows();
+			my $sth = $dbh->prepare("UPDATE wae07_pages SET content = ?, title = ?, parent_id = ? WHERE id = ?");
+			$sth->execute($.content, $.title, ($.parent_id > 0) ? $.parent_id : undef, $.id);
+			$msg = "Datensatz " . $.id ." in DB ver&auml;ndert.";
+		} else {
+			# Datensatz aus Formularfeldern in Datenbank einfügen
+			my $sth = $dbh->prepare("INSERT INTO wae07_pages (content,title,parent_id,author_user_id,created) values (?,?,?,?,NOW())");
+			$sth->execute($.content, $.title, ($.parent_id > 0) ? $.parent_id : undef, $m->session->{'user_id'});
+			$.id($sth->{mysql_insertid});
+			$msg = "Datensatz ". $.id ." neu in DB aufgenommen.";
 		}
 	} elsif ($.id) {
 		# id erkannt, daten aus Datenbank lesen
-		my $sth = $dbh->prepare("SELECT id, title, content, created, parent, metatext from wae07_pages WHERE id = ?");
+		my $sth = $dbh->prepare("SELECT id, title, content, created, parent_id from wae07_pages WHERE id = ?");
 		$sth->execute($.id);
 		my $res = $sth->fetchrow_hashref();
 		$.content($res->{content} || $.content);
 		$.title($res->{title});
-		$.parentid($res->{parent});
-		$msg = "Datensatz " . $.id . " aus DB gelesen.".((defined($res) && scalar(keys(%$res)))?1:0);
-	} else {
-		# keine ID, neues Dokument erstellen
-		my $sth = $dbh->prepare("SELECT max(id) as maxid FROM wae07_pages");
-		$sth->execute();
-		my $res = $sth->fetchrow_hashref();
-		$.id($res->{maxid}+1);
-		$.insert(1);
+		$.parent_id($res->{parent_id});
+		$msg = "Datensatz " . $.id . " aus DB gelesen.";
 	}
 </%init>

@@ -13,6 +13,7 @@ has 'maintitle' => (default => 'WAE Group 7');
 	<% $.head %>
     </head>
     <body>
+      <& user/loginout.mi &>
 % if (my $message = delete($m->session->{message})) {
       <div class="message" style="color:red"><% $message %></div>
 % }
