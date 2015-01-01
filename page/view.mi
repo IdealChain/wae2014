@@ -4,9 +4,20 @@
 <div>
   <% $page->{'content'} %>
 </div>
-
-Page: <a href="page/delete?id=<% $.id %>">Delete</a>
 </div>
+
+% if ($.loggedin) {
+<div>
+  <b>This page:</b>
+  <a href="editor?id=<% $.id %>">Edit</a>
+  <a href="page/delete?id=<% $.id %>">Delete</a>
+</div>
+<div>
+  <b>New page:</b>
+  <a href="editor?parent_id=<% $.id %>">Subpage</a>
+  <a href="editor?parent_id=<% $page->{'parent_id'} %>">Sibling page</a>
+</div>
+% }
 
 <%class>
   has 'id' => (required => 1);
@@ -14,7 +25,7 @@ Page: <a href="page/delete?id=<% $.id %>">Delete</a>
 
 <%init>
   my $dbh = Ws14::DBI->dbh();
-  my $sth = $dbh->prepare("select title, content from wae07_pages where id=?");
+  my $sth = $dbh->prepare("select title, content, parent_id from wae07_pages where id=?");
   $sth->execute($.id);
   my $page = $sth->fetchrow_hashref;
 </%init>

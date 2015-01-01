@@ -30,3 +30,7 @@ extends => undef
 <%method head>
 % #override in component do add more tags to head
 </%method>
+
+<%method loggedin>
+% return defined($m->session->{'user_id'}) and defined($m->session->{'user_name'});
+</%method>

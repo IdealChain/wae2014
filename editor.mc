@@ -71,7 +71,7 @@ method="post" enctype="application/x-www-form-urlencoded">
 	my $msg = "Welcome to the WCM content editor.";
 	my %docTitleAndIds = ('0', 'top level document');
   
-  if (not $m->session->{'user_id'}) {
+  if (not $.loggedin) {
     $m->session->{'message'} = "Please log in for creating and editing pages!";
     $m->redirect(".");
   }

@@ -1,5 +1,5 @@
 <div class="login">
-% if ($loggedin) {
+% if ($.loggedin) {
   User: <% $m->session->{'user_name'} %>
   <a href="user/logout">Logout</a>
 % } else {
@@ -18,7 +18,3 @@
   has 'username';
   has 'password';
 </%class>
-
-<%init>  
-  my $loggedin = defined($m->session->{'user_id'}) and defined($m->session->{'user_name'});
-</%init>
