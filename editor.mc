@@ -11,6 +11,25 @@
 	<link rel="stylesheet" href="static/css/editor.css">
 </%method>
 
+<%method printParentOptions ($pages, $level, %tree)>
+% foreach my $id (sort keys %tree) {
+	<option value="<% $id  %>"
+% if ($id == $.parent_id) {
+	selected
+% }
+	
+	>
+% for (my $i = $level; $i >= 1; --$i) {
+	&nbsp;
+% }
+		<% $pages->{$id}->{'title'} %>
+	</option>
+% if ($tree{$id}) {
+		<% $.printParentOptions($pages, $level + 1, %{$tree{$id}}) %>
+% }
+% }
+</%method>
+
 <h2>
 % if (defined($.id)) {
 Dokument <% $.id %> editieren
@@ -41,7 +60,10 @@ method="post" enctype="application/x-www-form-urlencoded">
                        -labels    => \%docTitleAndIds)
   %> aktuell: <% $docTitleAndIds{$parentid} %>
 </%doc>
-	<input type="text" id="parentInput" name="parent_id" value="<% $.parent_id %>" size="3" />
+	<select id="parentInput" name="parent_id">
+		<option value="0">&lt;root&gt;</option>
+		<% $.printParentOptions($pages, 0, %pageTree) %>
+	</select>
 </div>
 
 <div class="formField">
@@ -70,6 +92,11 @@ method="post" enctype="application/x-www-form-urlencoded">
 
 	my $msg = "Welcome to the WCM content editor.";
 	my %docTitleAndIds = ('0', 'top level document');
+	
+	my $sth = $dbh->prepare("select id, parent_id, title from wae07_pages");
+	$sth->execute();
+	my $pages = $sth->fetchall_hashref("id");
+	my %pageTree = $m->comp('page/pageTree.mp');
   
   if (not $.loggedin) {
     $m->session->{'message'} = "Please log in for creating and editing pages!";
