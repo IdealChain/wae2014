@@ -18,7 +18,7 @@ has 'maintitle' => (default => 'WAE Group 7');
       <div class="message" style="color:red"><% $message %></div>
 % }
       <% inner() %>
-      <& footer.mi, grp => '7' &>
+      <& footer.mi, grp => '7', lect => 'Web Application Engineering & Content Management', sem => 'WS2014', uni => 'TU Wien' &>
     </body>
   </html>
 </%augment>
