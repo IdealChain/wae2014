@@ -1,0 +1,8 @@
+<div class="page_author">
+  Written by <% $.username // 'Unknown' %>, <% $.created %>.
+</div>
+
+<%class>
+  has 'username';
+  has 'created';
+</%class>

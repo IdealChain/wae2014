@@ -1,9 +1,13 @@
 <& page/menu.mi &>
 
-<& page/view.mi, id => $.page_id &>
+% if ($.page_id) {
+  <& page/view.mi, id => $.page_id &>
+% } else {
+  <& page/newest.mi &>
+% }
 
 <%class>
-  has 'page_id' => (default => 1);
+  has 'page_id';
 </%class>
 
 <%init>
