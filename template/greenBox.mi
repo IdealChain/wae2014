@@ -9,12 +9,6 @@
 	</div>
 
 	<div id="right_nav">
-		<ul>                                        
-			<li><a href="home.html" title="">First link</a></li>
-			<li><a href="services.html" title="">Second link</a></li>
-			<li><a class="current" href="#" title="">Third link</a></li>
-			<li><a href="#" title="">Fourth link</a></li>
-			<li><a href="contact.html" title="">Fifth link</a></li>
-		</ul>
+		<& search.mi &>
 	</div>
 </div><!--end of green box-->

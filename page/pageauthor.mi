@@ -1,8 +1,15 @@
 <div class="page_author">
-  Written by <% $.username // 'Unknown' %>, <% $.created %>.
+  Written by
+% if ($.page->{'email'}) {
+  <a href="mailto:<% $.page->{'email'} %>">
+% }
+  <% $.page->{'username'} // 'Unknown' %>,
+% if ($.page->{'email'}) {
+  </a>
+% }
+  <% $.page->{'created'} %>.
 </div>
 
 <%class>
-  has 'username';
-  has 'created';
+  has 'page' => (required => 1);
 </%class>

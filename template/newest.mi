@@ -1,20 +1,27 @@
 <%class>
   has 'pages' => (default => sub { [] });
+  has 'search';
 </%class>
 
 <div id="newest">
-	<h2>Newest pages</h2>
-	
+	<h2>
+% if ($.search) {
+	Search results for '<% $.search %>'
+% } else {
+	Newest pages
+% }
+	</h2>
+
 % foreach my $page (values $.pages) {
 	<article>
 		<img src="static/images/1_Image.png" alt="" width="113" height="109" class="article_thumb" title="">
 		<section class="newest_right_section">
 			<h3><% $page->{'title'} %></h3>
-			<& ../page/pageauthor.mi, username => $page->{'username'}, created => $page->{'created'} &>
+			<& ../page/pageauthor.mi, page => $page &>
 			<p>
 				<% $page->{'excerpt'} %> (...)
 			</p>
-			<div class="read_more_link"><a href="index?page_id=<% $page->{'id'} %>">read more</a></div>
+			<a href="index?page_id=<% $page->{'id'} %>"><div class="read_more_link">read more</div></a>
 		</section>
 	</article>
 % }

@@ -1,8 +1,7 @@
 <div class="search_box">
-	<div class="search_title">Search for content</div>
-	<input class="search_input" type="text">
-	<input src="static/images/search.png" class="submit" type="image">
-	<div class="subsearch">
-		Search results.
-	</div>
+  <form action="index" method="get">
+    <div class="search_title">Search for page contents</div>
+    <input class="search_input" type="text" name="search" />
+    <input src="static/images/search.png" class="submit" type="image" />
+  </form>
 </div>

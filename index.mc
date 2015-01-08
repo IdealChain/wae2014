@@ -1,5 +1,6 @@
 <%class>
   has 'page_id';
+  has 'search';
 </%class>
 
 <%init>
@@ -16,6 +17,8 @@
 
 % if ($.page_id) {
   <& page/view.mi, id => $.page_id &>
+% } elsif ($.search) {
+  <& page/search.mi, search => $.search &>
 % } else {
   <& page/newest.mi &>
 % }

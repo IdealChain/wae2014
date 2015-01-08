@@ -1,9 +1,9 @@
-<& ../template/newest.mi, pages => $pages &>
+<& ../template/newest.mi, pages => $pages, search => $.search &>
 
 <%class>
   has 'num' => (default => 10);
-  has 'offset' => (default => 0);
   has 'excerpt_words' => (default => 12);
+  has 'search' => (required => 1);
 </%class>
 
 <%init>
@@ -12,10 +12,12 @@
 
 select p.id, title, created, username, email, SUBSTRING_INDEX(content, ' ', ?) as excerpt
 from wae07_pages as p left join wae07_users as u on p.author_user_id = u.id
-order by created desc
-limit ?,?
+where title like ? or content like ?
+limit ?
 END
 
-  $sth->execute($.excerpt_words, $.offset, $.num);
-  my $pages = $sth->fetchall_arrayref({}); 
+  my $pattern = '%'.$.search.'%';
+  $sth->execute($.excerpt_words, $pattern, $pattern, $.num);
+  my $pages = $sth->fetchall_arrayref({});
 </%init>
+
