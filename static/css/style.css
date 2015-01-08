@@ -110,6 +110,10 @@ background-color:#416271;
   position: relative;
   list-style: none;
 }
+#cssmenu li.newpage {
+  opacity: 0.8;
+  font-style: italic;
+}
 #cssmenu a,
 #cssmenu a:link {
   font-weight: bold;
