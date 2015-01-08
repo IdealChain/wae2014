@@ -1,0 +1,25 @@
+<div id="left_content">
+	<h2>Space for special content</h2>
+	<p>
+		Here goes the text for some special, interesting information, content, headline ect.
+		Down of this text are recommendation from related information, or other similar, or
+		interesting contents. Also there is opportunity for uploading p
+	</p>
+
+	<div id="left_nav">
+		<ul>                                        
+			<li><a href="home.html" title="">Other related or interesting content</a></li>
+			<li><a href="home.html" title="">Other related or interesting content</a></li>
+			<li><a href="#" title="">Other related or interesting content</a></li>
+			<li><a href="#" title="">Other related or interesting content</a></li>
+		</ul>
+	</div>
+
+	<p class="clear">
+		<img src="static/images/3_Image.png" alt="" width="128" height="104" class="left_img" title="">
+		Here goes the second part of the information quick text, that explains the content.
+		Down is also the button "read more" if the user want to read more from this information.
+		Depanding of the amount of the text, div tags arrange them automatically.
+	</p>   
+	<div class="read_more_link"><a href="#">read more</a></div>
+</div><!--end of left content-->

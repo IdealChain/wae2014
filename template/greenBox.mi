@@ -1,0 +1,20 @@
+<div class="green_box">
+	<div class="clock"><img src="static/images/TU_logo_main.png" alt="" title=""></div>
+	<div class="text_content">
+		<h1>Header </h1>
+		<p class="green">
+			The Vienna University of Technology – TU Wien (TUW) – is located in the heart of Euro, in a cosmopolitan city of great cultural diversity. For nearly 200 years, the TU Wien has been a place of research, teaching and learning in the service of progress. The TU Wien is among the most successful technical universities in Europe and is Austria’s largest scientific-technical research and educational institution. 
+		</p>
+		<div class="read_more"><a href="#">read more</a></div>
+	</div>
+
+	<div id="right_nav">
+		<ul>                                        
+			<li><a href="home.html" title="">First link</a></li>
+			<li><a href="services.html" title="">Second link</a></li>
+			<li><a class="current" href="#" title="">Third link</a></li>
+			<li><a href="#" title="">Fourth link</a></li>
+			<li><a href="contact.html" title="">Fifth link</a></li>
+		</ul>
+	</div>
+</div><!--end of green box-->

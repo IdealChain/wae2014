@@ -1,0 +1,10 @@
+<div id="footer">
+	<div class="copyright">
+		<a href="/">Web Application Engineering & Content Management</a>
+	</div>
+	<div class="footer_links"> 
+		<a href="#">About us</a>
+		<a href="#">Privacy policy</a> 
+		<a href="#">Contact us </a>
+	</div>
+</div>

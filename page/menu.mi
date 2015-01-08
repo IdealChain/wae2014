@@ -23,6 +23,4 @@
 	</ul>
 </%method>
 
-<nav class="menu">
-	<% $.printMenu($pages, %pageTree) %>
-</nav>
+<% $.printMenu($pages, %pageTree) %>

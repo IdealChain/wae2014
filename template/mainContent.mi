@@ -1,0 +1,5 @@
+<div id="main_content">
+	<& rightContent.mi &>
+	<& leftContent.mi &>
+	<div style=" clear:both;"></div>
+</div><!--end of main content-->

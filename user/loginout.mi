@@ -1,4 +1,4 @@
-<div class="login">
+<div class="login" id="login">
 % if ($.loggedin) {
   User: <% $m->session->{'user_name'} %>
   <a href="user/logout">Logout</a>

@@ -6,6 +6,7 @@ has 'maintitle' => (default => 'WAE Group 7');
 <!doctype html>
   <html>
     <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
       <link rel="stylesheet" href="static/css/style.css">
 % $.Defer {{
       <title><% $.maintitle %></title>
@@ -13,12 +14,18 @@ has 'maintitle' => (default => 'WAE Group 7');
 	<% $.head %>
     </head>
     <body>
-      <& user/loginout.mi &>
+	
+	  <div id="main_container">
+	    <& template/header.mi &>
+	    <& template/greenBox.mi &>
+        <& template/mainContent.mi &>
+		
 % if (my $message = delete($m->session->{message})) {
-      <div class="message" style="color:red"><% $message %></div>
+        <div class="message" style="color:red"><% $message %></div>
 % }
-      <% inner() %>
-      <& footer.mi, grp => '7' &>
+        <% inner() %>
+        <& template/footer.mi, grp => '7' &>
+      </div>
     </body>
   </html>
 </%augment>
