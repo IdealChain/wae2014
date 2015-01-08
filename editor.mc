@@ -30,7 +30,9 @@
 % }
 </%method>
 
-<h2>
+<div class="editor">
+		
+<h2 class="page_title">
 % if (defined($.id)) {
   Edit page <% $.id %>
 % } else {
@@ -81,6 +83,8 @@ method="post" enctype="application/x-www-form-urlencoded">
 </div>
 
 </form>
+	
+</div> <!-- editor -->
 
 <%init>
 	use Data::Dumper;

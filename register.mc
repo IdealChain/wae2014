@@ -1,14 +1,19 @@
 <div class="register">
-
-  <h1>Register a new user</h1>
+  <h1 class="page_title">Register a new user</h1>
 
   <form action="user/register">
-    <label for="username">Username:</label>
-    <input name="username" type="text" value="<% $.username %>"/>
-    <label for="password">Password:</label>
-    <input name="password" type="password" value="<% $.password %>"/>
-    <label for="email">Email Address:</label>
-    <input name="email" type="text" value="<% $.email %>"/>
+    <div class="form_field">
+      <label for="username">Username:</label>
+      <input name="username" type="text" value="<% $.username %>"/>
+	</div>
+	<div class="form_field">
+      <label for="password">Password:</label>
+      <input name="password" type="password" value="<% $.password %>"/>
+    </div>
+	<div class="form_field">
+      <label for="email">Email Address:</label>
+      <input name="email" type="text" value="<% $.email %>"/>
+	</div>
     <input name="register" type="submit" value="Register"/>
   </form>
 </div>

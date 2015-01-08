@@ -45,7 +45,34 @@ img.box_img{
 	position:relative;
 	float:right;
 	right: 30px;
-	top: 35px;
+	top: 20px;
+	
+	label {
+		display: inline-block;
+		width: 5em;
+	}
+	
+	.form_field input {
+		width: 8em;
+	}
+}
+
+.register {
+	padding: 10px;
+	line-height: 1.5;
+	
+	h1 {
+		margin: 0 0 10px 0;
+	}
+	
+	label {
+		display: inline-block;
+		width: 8em;
+	}
+	
+	.form_field input {
+		width: 8em;
+	}
 }
 
 @import 'menu';
