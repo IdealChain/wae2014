@@ -1,7 +1,7 @@
 <%class>
   has 'id';
   has 'title';
-  has 'content' => (default => "<font face=Verdana>bitte hier den Text eingeben.\n</font>\n");
+  has 'content' => (default => "<font face=Verdana>Please enter your text here!\n</font>\n");
   has 'save';
   has 'parent_id';
 </%class>
@@ -32,9 +32,9 @@
 
 <h2>
 % if (defined($.id)) {
-Dokument <% $.id %> editieren
+  Edit page <% $.id %>
 % } else {
-Neues Dokument anlegen
+  Create new page
 % }
 </h2>
 % if (length($msg)) {
@@ -53,13 +53,6 @@ method="post" enctype="application/x-www-form-urlencoded">
 
 <div class="formField">
 	<label for="parentInput">Parent:</label>
-<%doc>
-<%  $cgi->popup_menu(-name      =>'parentid',
-                       -values    => [ sort keys %docTitleAndIds ],
-                       -default   => $parentid,
-                       -labels    => \%docTitleAndIds)
-  %> aktuell: <% $docTitleAndIds{$parentid} %>
-</%doc>
 	<select id="parentInput" name="parent_id">
 		<option value="0">&lt;root&gt;</option>
 		<% $.printParentOptions($pages, 0, %pageTree) %>
@@ -72,15 +65,19 @@ method="post" enctype="application/x-www-form-urlencoded">
 		// Replace the <textarea id="content"> with a CKEditor
 		// instance, using default configuration.
 		CKEDITOR.replace('content',{
-			width   : '560px',
-			height  : '400px'
+			width   : '800px',
+			height  : '480px'
 		});
 	</script>
 </div>
 
 <div id="formButtons">
-	<input type="submit" value="&Auml;nderungen speichern" name="save">
-	<input type="reset" value="&Auml;nderungen verwerfen" name="cancel">
+  <input type="submit" value="Save Changes" name="save">
+% if ($pagelink) {
+  <a href="<% $pagelink %>">Cancel / Back to page</a>
+% } else {
+  <a href=".">Cancel</a>
+% }
 </div>
 
 </form>
@@ -89,25 +86,18 @@ method="post" enctype="application/x-www-form-urlencoded">
 	use Data::Dumper;
 
 	my $dbh = Ws14::DBI->dbh();
-
-	my $msg = "Welcome to the WCM content editor.";
-	my %docTitleAndIds = ('0', 'top level document');
-	
+	my $msg = "";
 	my $sth = $dbh->prepare("select id, parent_id, title from wae07_pages");
 	$sth->execute();
 	my $pages = $sth->fetchall_hashref("id");
 	my %pageTree = $m->comp('page/pageTree.mp');
-  
+
+  my $pagelink = sprintf('index?page_id=%d', $.id) if $.id;
+
   if (not $.loggedin) {
     $m->session->{'message'} = "Please log in for creating and editing pages!";
     $m->redirect(".");
   }
-
-	my $sth = $dbh->prepare("SELECT id, title from wae07_pages");
-	$sth->execute();
-	while (my $res = $sth->fetchrow_hashref()) {
-		$docTitleAndIds{$res->{id}} = $res->{title};
-	}
 
 	# $m->print("Content:". $.content . ",<br/> args(content):" . $.args->{'content'} . "<br/>");
 	if ($.save) { # Speichern wurde gedrückt...
@@ -115,13 +105,13 @@ method="post" enctype="application/x-www-form-urlencoded">
 			# Datensatz in Datenbank ändern
 			my $sth = $dbh->prepare("UPDATE wae07_pages SET content = ?, title = ?, parent_id = ? WHERE id = ?");
 			$sth->execute($.content, $.title, ($.parent_id > 0) ? $.parent_id : undef, $.id);
-			$msg = "Datensatz " . $.id ." in DB ver&auml;ndert.";
+			$msg = "Page " . $.id ." updated.";
 		} else {
 			# Datensatz aus Formularfeldern in Datenbank einfügen
 			my $sth = $dbh->prepare("INSERT INTO wae07_pages (content,title,parent_id,author_user_id,created) values (?,?,?,?,NOW())");
 			$sth->execute($.content, $.title, ($.parent_id > 0) ? $.parent_id : undef, $m->session->{'user_id'});
 			$.id($sth->{mysql_insertid});
-			$msg = "Datensatz ". $.id ." neu in DB aufgenommen.";
+			$msg = "Page ". $.id ." created.";
 		}
 	} elsif ($.id) {
 		# id erkannt, daten aus Datenbank lesen
@@ -131,6 +121,6 @@ method="post" enctype="application/x-www-form-urlencoded">
 		$.content($res->{content} || $.content);
 		$.title($res->{title});
 		$.parent_id($res->{parent_id});
-		$msg = "Datensatz " . $.id . " aus DB gelesen.";
+		$msg = "Page " . $.id . " fetched from DB.";
 	}
 </%init>
