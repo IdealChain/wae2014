@@ -8,7 +8,7 @@
 	my %pageTree = $m->comp('pageTree.mp');
 </%init>
 
-<%method printMenu ($pages, %tree)>
+<%method printMenu ($level, $parent_id, $pages, %tree)>
 	<ul>
 % foreach my $id (sort keys %tree) {
 		<li>
@@ -16,11 +16,14 @@
 			<% $pages->{$id}->{'title'} %>
 		</a>
 % if ($tree{$id}) {
-		<% $.printMenu($pages, %{$tree{$id}}) %>
+		<% $.printMenu($level+1, $id, $pages, %{$tree{$id}}) %>
 % }
 		</li>
+% }
+% if ($.loggedin and $level < 3) {
+  <li class="newpage"><a href="editor?parent_id=<% $parent_id %>">New page here</a></li>
 % }
 	</ul>
 </%method>
 
-<% $.printMenu($pages, %pageTree) %>
+<% $.printMenu(0, '', $pages, %pageTree) %>
