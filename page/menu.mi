@@ -11,7 +11,11 @@
 <%method printMenu ($level, $parent_id, $pages, %tree)>
 	<ul>
 % foreach my $id (sort keys %tree) {
-		<li>
+		<li
+% if ($tree{$id}) {
+		class="has-sub"
+% }	
+		>
 		<a href="index?page_id=<% $id %>">
 			<% $pages->{$id}->{'title'} %>
 		</a>
