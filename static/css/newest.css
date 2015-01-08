@@ -1,0 +1,10 @@
+#newest > article {
+  border-bottom: 1px #a7ef6e dashed;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+  overflow: auto; }
+  #newest > article .article_thumb {
+    float: left;
+    margin-right: 10px; }
+  #newest > article .newest_right_section {
+    overflow: auto; }

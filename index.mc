@@ -1,9 +1,3 @@
-% if ($.page_id) {
-  <& page/view.mi, id => $.page_id &>
-% } else {
-  <& page/newest.mi &>
-% }
-
 <%class>
   has 'page_id';
 </%class>
@@ -15,3 +9,13 @@
     $m->redirect("/wae07/");
   }
 </%init>
+
+<%method head>
+	<link rel="stylesheet" href="static/css/newest.css">
+</%method>
+
+% if ($.page_id) {
+  <& page/view.mi, id => $.page_id &>
+% } else {
+  <& page/newest.mi &>
+% }

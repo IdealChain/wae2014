@@ -2,18 +2,20 @@
   has 'pages' => (default => sub { [] });
 </%class>
 
-<div id="right_content">
+<div id="newest">
 	<h2>Newest pages</h2>
 	
 % foreach my $page (values $.pages) {
-	<div class="products_box">
-		<img src="static/images/1_Image.png" alt="" width="113" height="109" class="box_img" title="">
-		<h3><% $page->{'title'} %></h3>
-		<& ../page/pageauthor.mi, username => $page->{'username'}, created => $page->{'created'} &>
-		<p>         
-			<% $page->{'excerpt'} %> (...)
-		</p>
-		<div class="read_more_link"><a href="index?page_id=<% $page->{'id'} %>">read more</a></div>
-	</div>
+	<article>
+		<img src="static/images/1_Image.png" alt="" width="113" height="109" class="article_thumb" title="">
+		<section class="newest_right_section">
+			<h3><% $page->{'title'} %></h3>
+			<& ../page/pageauthor.mi, username => $page->{'username'}, created => $page->{'created'} &>
+			<p>
+				<% $page->{'excerpt'} %> (...)
+			</p>
+			<div class="read_more_link"><a href="index?page_id=<% $page->{'id'} %>">read more</a></div>
+		</section>
+	</article>
 % }
 </div><!--end of right content-->
