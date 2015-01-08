@@ -8,6 +8,7 @@ has 'maintitle' => (default => 'WAE Group 7');
     <head>
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
       <link rel="stylesheet" href="static/css/style.css">
+	  <link rel="stylesheet" href="static/css/view.css">
 % $.Defer {{
       <title><% $.maintitle %></title>
 % }}
@@ -17,7 +18,7 @@ has 'maintitle' => (default => 'WAE Group 7');
 	
 	  <div id="main_container">
 	    <& template/header.mi &>
-	    <& template/greenBox.mi &>
+	    <& template/subHeader.mi &>
 		<div id="main_content">
 % if (my $message = delete($m->session->{message})) {
           <div class="message" style="color:red"><% $message %></div>

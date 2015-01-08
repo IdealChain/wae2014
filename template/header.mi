@@ -1,4 +1,4 @@
-<div id="header">
+<header>
 	<div id="logo">
 		<a href="/">
 			<img src="static/images/TU_Logo.png" alt="" width="198" height="77" title="" border="0">
@@ -7,4 +7,4 @@
 	<& ../user/loginout.mi &>
 
 	<& menu.mi &>
-</div>
+</header>

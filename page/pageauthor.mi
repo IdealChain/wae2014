@@ -3,11 +3,11 @@
 % if ($.page->{'email'}) {
   <a href="mailto:<% $.page->{'email'} %>">
 % }
-  <% $.page->{'username'} // 'Unknown' %>,
+  <% $.page->{'username'} // 'Unknown' %>
 % if ($.page->{'email'}) {
   </a>
 % }
-  <% $.page->{'created'} %>.
+  , <% $.page->{'created'} %>.
 </div>
 
 <%class>

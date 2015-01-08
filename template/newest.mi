@@ -4,7 +4,7 @@
 </%class>
 
 <div id="newest">
-	<h2>
+	<h2 class="page_title">
 % if ($.search) {
 	Search results for '<% $.search %>'
 % } else {

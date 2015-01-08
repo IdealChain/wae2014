@@ -1,8 +1,6 @@
-<div id="footer">
-	<div class="copyright">
-		Site by group <% $.grp %>, <% $.lect %>, <% $.sem %>, <% $.uni %>.
-	</div>
-</div>
+<footer>
+	Site by group <% $.grp %>, <% $.lect %>, <% $.sem %>, <% $.uni %>.
+</footer>
 
 <%class>
   has 'grp';

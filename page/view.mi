@@ -1,24 +1,28 @@
 <div class="page">
 
-<h1><% $page->{'title'} %></h1>
+<h2 class="page_title"><% $page->{'title'} %></h2>
 <& pageauthor.mi, page => $page &>
 
-<div>
+<div class="page_content">
   <% $page->{'content'} %>
 </div>
 </div>
 
 % if ($.loggedin) {
-<div>
-  <b>This page:</b>
-  <a href="editor?id=<% $.id %>">Edit</a>
-  <a href="page/delete?id=<% $.id %>">Delete</a>
-</div>
-<div>
-  <b>New page:</b>
-  <a href="editor?parent_id=<% $.id %>">Subpage</a>
-  <a href="editor?parent_id=<% $page->{'parent_id'} %>">Sibling page</a>
-</div>
+<nav id="edit_page_nav">
+  <span class="nav_label">This page:</span>
+  <ul>
+    <li><a href="editor?id=<% $.id %>">Edit</a></li>
+    <li><a href="page/delete?id=<% $.id %>">Delete</a></li>
+  </ul>
+</nav>
+<nav id="new_page_nav">
+  <span class="nav_label">New page:</span>
+  <ul>
+    <li><a href="editor?parent_id=<% $.id %>">Subpage</a></li>
+    <li><a href="editor?parent_id=<% $page->{'parent_id'} %>">Sibling page</a></li>
+  </ul>
+</nav>
 % }
 
 <%class>
