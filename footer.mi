@@ -1,9 +1,0 @@
-<%class>
-  has 'grp';
-  has 'lect';
-  has 'sem';
-  has 'uni';
-</%class>
-<div class="footer">
-  Site by group <% $.grp %>, <% $.lect %>, <% $.sem %>, <% $.uni %>.
-</div>
