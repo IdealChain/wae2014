@@ -1,4 +1,9 @@
 <%class>
-has 'grp';
+  has 'grp';
+  has 'lect';
+  has 'sem';
+  has 'uni';
 </%class>
-<div>This page by WAE group <% $.grp %>;</div>
+<div class="footer">
+  Site by group <% $.grp %>, <% $.lect %>, <% $.sem %>, <% $.uni %>.
+</div>

@@ -1,0 +1,30 @@
+<h1>Newest pages</h1>
+
+% foreach my $page (values $pages) {
+  <div>
+    <h3><% $page->{'title'} %></h3>
+    <& pageauthor.mi, username => $page->{'username'}, created => $page->{'created'} &>
+    <div><% $page->{'excerpt'} %> (...)</div>
+    <a href="index?page_id=<% $page->{'id'} %>">Read more</a>
+  </div>
+% }
+
+<%class>
+  has 'num' => (default => 10);
+  has 'offset' => (default => 0);
+  has 'excerpt_words' => (default => 12);
+</%class>
+
+<%init>
+  my $dbh = Ws14::DBI->dbh();
+  my $sth = $dbh->prepare(<<END);
+
+select id, title, created, SUBSTRING_INDEX(content, ' ', ?) as excerpt
+from wae07_pages
+order by created desc
+limit ?,?
+END
+
+  $sth->execute($.excerpt_words, $.offset, $.num);
+  my $pages = $sth->fetchall_arrayref({}); 
+</%init>

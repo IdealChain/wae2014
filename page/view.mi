@@ -1,5 +1,7 @@
 <div class="page">
+
 <h1><% $page->{'title'} %></h1>
+<& pageauthor.mi, username => $page->{'username'}, created => $page->{'created'} &>
 
 <div>
   <% $page->{'content'} %>
@@ -25,7 +27,13 @@
 
 <%init>
   my $dbh = Ws14::DBI->dbh();
-  my $sth = $dbh->prepare("select title, content, parent_id from wae07_pages where id=?");
+  my $sth = $dbh->prepare(<<END);
+
+select p.title, p.content, p.parent_id, p.created, u.username, u.email
+from wae07_pages as p left join wae07_users as u on p.author_user_id = u.id
+where p.id = ?
+END
+
   $sth->execute($.id);
   my $page = $sth->fetchrow_hashref;
 </%init>
