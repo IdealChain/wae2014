@@ -7,7 +7,7 @@
 </%class>
 
 <%method head>
-	<script src="/static/ckeditor/ckeditor.js"></script>
+	<script src="static/ckeditor/ckeditor.js"></script>
 	<link rel="stylesheet" href="static/css/editor.css">
 </%method>
 
