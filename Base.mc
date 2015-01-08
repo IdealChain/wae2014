@@ -18,12 +18,12 @@ has 'maintitle' => (default => 'WAE Group 7');
 	  <div id="main_container">
 	    <& template/header.mi &>
 	    <& template/greenBox.mi &>
-        <& template/mainContent.mi &>
-		
+		<div id="main_content">
 % if (my $message = delete($m->session->{message})) {
-        <div class="message" style="color:red"><% $message %></div>
+          <div class="message" style="color:red"><% $message %></div>
 % }
-        <% inner() %>
+          <% inner() %>
+		</div><!--end of main content-->
         <& template/footer.mi, grp => '7', lect => 'Web Application Engineering & Content Management', sem => 'WS2014', uni => 'TU Wien' &>
       </div>
     </body>

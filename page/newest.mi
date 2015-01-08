@@ -1,13 +1,4 @@
-<h1>Newest pages</h1>
-
-% foreach my $page (values $pages) {
-  <div>
-    <h3><% $page->{'title'} %></h3>
-    <& pageauthor.mi, username => $page->{'username'}, created => $page->{'created'} &>
-    <div><% $page->{'excerpt'} %> (...)</div>
-    <a href="index?page_id=<% $page->{'id'} %>">Read more</a>
-  </div>
-% }
+<& ../template/newest.mi, pages => $pages &>
 
 <%class>
   has 'num' => (default => 10);
