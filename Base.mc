@@ -21,7 +21,7 @@ has 'maintitle' => (default => 'WAE Group 7');
 	    <& template/subHeader.mi &>
 		<div id="main_content">
 % if (my $message = delete($m->session->{message})) {
-          <div class="message" style="color:red"><% $message %></div>
+          <div class="message"><% $message %></div>
 % }
           <% inner() %>
 		</div><!--end of main content-->

@@ -55,6 +55,10 @@ img.box_img {
   .register .form_field input {
     width: 8em; }
 
+.message {
+  background-color: #ffc7c7;
+  padding: 10px; }
+
 #cssmenu {
   padding: 0px;
   clear: both;
