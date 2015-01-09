@@ -96,8 +96,6 @@ method="post" enctype="application/x-www-form-urlencoded">
 	my $pages = $sth->fetchall_hashref("id");
 	my %pageTree = $m->comp('page/pageTree.mp');
 
-  my $pagelink = sprintf('index?page_id=%d', $.id) if $.id;
-
   if (not $.loggedin) {
     $m->session->{'message'} = "Please log in for creating and editing pages!";
     $m->redirect(".");
@@ -127,4 +125,6 @@ method="post" enctype="application/x-www-form-urlencoded">
 		$.parent_id($res->{parent_id});
 		$msg = "Page " . $.id . " fetched from DB.";
 	}
+
+	my $pagelink = sprintf('index?page_id=%d', $.id) if $.id;
 </%init>
